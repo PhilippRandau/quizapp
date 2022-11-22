@@ -9,7 +9,7 @@ body{
     align-items: center;
 }
 .quiz-card{
-    width: 18rem !important;
+    width: 30rem !important;
 }
 .question-footer{
     border-top: 1px solid black;

@@ -19,49 +19,45 @@
         crossorigin="anonymous"></script>
 </head>
 
-<body>
+<body onload="init()">
     <nav class="navbar navbar-expand-lg bg-light">
         <div class="container-fluid">
             <h1>Quizapp</h1>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
         </div>
     </nav>
     <div class="container">
         <div class="card quiz-card" >
             <img src="/img/brain-g554dc637e_1920.jpg" class="card-img-top" alt="...">
             <div class="card-body">
-                <h5 class="card-title">Frage</h5>
+                <h5 class="card-title" id="question-text">Frage</h5>
 
                 <div class="card mb-2">
-                    <div class="card-body">
-                        This is some text within a card body.
+                    <div class="card-body" id="answer-1">
+                        Antwort 1
                     </div>
                 </div>
 
                 <div class="card mb-2">
-                    <div class="card-body">
-                        This is some text within a card body.
+                    <div class="card-body" id="answer-2">
+                        Antwort 2
                     </div>
                 </div>
 
                 <div class="card mb-2">
-                    <div class="card-body">
-                        This is some text within a card body.
+                    <div class="card-body" id="answer-3">
+                        Antwort 3
                     </div>
                 </div>
 
                 <div class="card mb-2">
-                    <div class="card-body">
-                        This is some text within a card body.
+                    <div class="card-body" id="answer-4">
+                        Antwort 4
                     </div>
                 </div>
                 <div class="question-footer">
-                    <span> <b>1</b> von <b>5</b> Fragen</span>
+                    <span> <b id="current-question">1</b> von <b id="length-questions">5</b> Fragen</span>
                     
-                    <a href="#" class="btn btn-primary">Nächste Frage</a>
+                    <a id="next-question" href="#" class="btn btn-primary">Nächste Frage</a>
                 </div>
                 
             </div>
