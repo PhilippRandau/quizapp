@@ -52,7 +52,7 @@ function init() {
     lengthQuestions.innerHTML = '';
     lengthQuestions.innerHTML = questions.length;
     currentQuestionOnCard.innerHTML = '';
-    currentQuestionOnCard.innerHTML = currentQuestion+1;
+    currentQuestionOnCard.innerHTML = currentQuestion + 1;
 
 
     showCurrentQuestion();
@@ -63,18 +63,33 @@ function init() {
 function showCurrentQuestion() {
     let question = questions[currentQuestion];
     let questionText = document.getElementById('question-text');
-    let answer1 = document.getElementById('answer-1');
-    let answer2 = document.getElementById('answer-2');
-    let answer3 = document.getElementById('answer-3');
-    let answer4 = document.getElementById('answer-4');
-
+    let answer1 = document.getElementById('answer_1');
+    let answer2 = document.getElementById('answer_2');
+    let answer3 = document.getElementById('answer_3');
+    let answer4 = document.getElementById('answer_4');
 
     questionText.innerHTML = question['question'];
     answer1.innerHTML = question['answer_1'];
     answer2.innerHTML = question['answer_2'];
     answer3.innerHTML = question['answer_3'];
     answer4.innerHTML = question['answer_4'];
-
-
-
 }
+
+
+function answer(Answer_X) {
+    let rightAnswer = questions[currentQuestion]["right_answer"];
+    let NumberFromString = Answer_X[Answer_X.length - 1];
+    console.log(NumberFromString);
+    if (NumberFromString == rightAnswer) {
+        document.getElementById(Answer_X).parentNode.classList.add('bg-success');
+        
+    } else {
+        document.getElementById(Answer_X).parentNode.classList.add('bg-danger');
+    }
+    // document.querySelector('#answer_1').disabled = true;
+}
+
+// function extractNumberFromString(Answer_X) {
+    
+//     return NumberFromString;
+// }
