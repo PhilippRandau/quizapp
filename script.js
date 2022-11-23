@@ -56,7 +56,8 @@ function init() {
 
 
     showCurrentQuestion();
-
+    reset();
+    
 }
 
 
@@ -78,18 +79,52 @@ function showCurrentQuestion() {
 
 function answer(Answer_X) {
     let rightAnswer = questions[currentQuestion]["right_answer"];
-    let NumberFromString = Answer_X[Answer_X.length - 1];
-    console.log(NumberFromString);
+    let NumberFromString = extractNumberFromString(Answer_X);
+    let rightAnswerString = `answer_${rightAnswer}`;
+    console.log(rightAnswerString);
     if (NumberFromString == rightAnswer) {
         document.getElementById(Answer_X).parentNode.classList.add('bg-success');
         
     } else {
         document.getElementById(Answer_X).parentNode.classList.add('bg-danger');
+        document.getElementById(rightAnswerString).parentNode.classList.add('bg-success');
     }
-    // document.querySelector('#answer_1').disabled = true;
+    document.getElementById('next-question').disabled = false;
+    lockAnswerButtons();
 }
 
-// function extractNumberFromString(Answer_X) {
+function extractNumberFromString(Answer_X) {
     
-//     return NumberFromString;
-// }
+    return Answer_X[Answer_X.length - 1];
+}
+
+function nextQuestion(){
+    if (currentQuestion < questions.length-1) {
+        currentQuestion ++;
+        init();
+    }else{
+        showFinalPoints();
+    }
+    
+
+    
+}
+
+function reset(){
+    document.getElementById('next-question').disabled = true;
+
+    for (let i = 1; i < 5; i++) {
+        document.getElementById(`answer_${i}`).parentNode.classList.remove('bg-success');
+        document.getElementById(`answer_${i}`).parentNode.classList.remove('bg-danger');
+        document.getElementById(`answer_${i}`).disabled = false;
+    }
+    
+}function lockAnswerButtons(){
+    for (let i = 1; i < 5; i++) {
+        document.getElementById(`answer_${i}`).disabled = true;
+    }
+}
+
+function showFinalPoints(){
+    alert("ende");
+}
