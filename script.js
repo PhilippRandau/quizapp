@@ -1,6 +1,6 @@
 let questions = [
     {
-        "question": "Wie heißt 'Star Wars' auf Deutsch?",
+        "question": "Wie wird Star Wars auf Deutsch genannt?",
         "answer_1": "Sternen Krieg",
         "answer_2": "Krieg der Sterne",
         "answer_3": "Krieg gegen die Sterne",
@@ -45,6 +45,7 @@ let questions = [
 ];
 
 let currentQuestion = 0;
+let QuestionPoints = 0;
 
 function init() {
     let lengthQuestions = document.getElementById('length-questions');
@@ -56,8 +57,8 @@ function init() {
 
 
     showCurrentQuestion();
-    reset();
-    
+    resetChoosedAnswer();
+
 }
 
 
@@ -83,48 +84,77 @@ function answer(Answer_X) {
     let rightAnswerString = `answer_${rightAnswer}`;
     console.log(rightAnswerString);
     if (NumberFromString == rightAnswer) {
-        document.getElementById(Answer_X).parentNode.classList.add('bg-success');
-        
+        document.getElementById(Answer_X).classList.add('bg-success');
+        QuestionPoints++;
+
     } else {
-        document.getElementById(Answer_X).parentNode.classList.add('bg-danger');
-        document.getElementById(rightAnswerString).parentNode.classList.add('bg-success');
+        document.getElementById(Answer_X).classList.add('bg-danger');
+        document.getElementById(rightAnswerString).classList.add('bg-success');
     }
     document.getElementById('next-question').disabled = false;
     lockAnswerButtons();
 }
 
 function extractNumberFromString(Answer_X) {
-    
+
     return Answer_X[Answer_X.length - 1];
 }
 
-function nextQuestion(){
-    if (currentQuestion < questions.length-1) {
-        currentQuestion ++;
+function nextQuestion() {
+    if (currentQuestion < questions.length - 1) {
+        currentQuestion++;
         init();
-    }else{
+    } else {
         showFinalPoints();
     }
-    
 
-    
+
+
 }
 
-function reset(){
+function resetChoosedAnswer() {
     document.getElementById('next-question').disabled = true;
 
     for (let i = 1; i < 5; i++) {
-        document.getElementById(`answer_${i}`).parentNode.classList.remove('bg-success');
-        document.getElementById(`answer_${i}`).parentNode.classList.remove('bg-danger');
+        document.getElementById(`answer_${i}`).classList.remove('bg-success');
+        document.getElementById(`answer_${i}`).classList.remove('bg-danger');
         document.getElementById(`answer_${i}`).disabled = false;
     }
-    
-}function lockAnswerButtons(){
+
+} function lockAnswerButtons() {
     for (let i = 1; i < 5; i++) {
         document.getElementById(`answer_${i}`).disabled = true;
     }
 }
 
-function showFinalPoints(){
-    alert("ende");
+function showFinalPoints() {
+    let cardBody = document.getElementById('card-body');
+    cardBody.innerHTML = ''
+    cardBody.innerHTML = /*html*/`
+    <div class="result">
+        <img class="mt-5" src="img/brain result.png" alt="">
+        
+    
+        <h5 class="card-title mt-2 mb-2" id="question-text"> <b> Star Wars Quiz Erledigt </b></h5>
+        <div class="result-points">
+            <span class="result-points-text" > Deine Punktzahl ist </span> <span> <b> ${QuestionPoints}/${questions.length} </b></span>
+        </div>
+        <button type="button" class="mt-4 btn btn-primary btn-width">Share</button>
+        <button onclick="resetReplay()" type="button" class="mt-2 btn btn-outline-primary btn-width">Replay</button>
+    </div>
+    `;
+    document.getElementById('tropy').classList.remove('d-none');
+}
+
+function resetReplay(){
+    hideTropyIMG();
+    resetPoints();
+}
+
+function hideTropyIMG(){
+    document.getElementById('tropy').classList.add('d-none');
+}
+
+function resetPoints(){
+    QuestionPoints = 0;
 }

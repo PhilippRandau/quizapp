@@ -19,70 +19,81 @@
         crossorigin="anonymous"></script>
 </head>
 
-<body onload="init()">
-    <nav class="navbar navbar-expand-lg bg-light">
-        <div class="container-fluid">
-            <h1>Quizapp</h1>
-        </div>
-    </nav>
+<body  onload="init()">
+    <img id="tropy" class="tropy d-none" src="img/tropy.png" alt="">
 
     <div class="container">
 
-        <div class="card mb-3 quiz-card">
+        <div class="card mb-3">
             <div class="row g-0">
-                <div class="col-md-4">
-                    <img src="/img/brain-g554dc637e_1920.jpg" class="card-img-top" alt="...">
+                <div class="col-md-4 nav">
+                    <div class="logo mt-4">
+                        <img class="logo-img" src="/img/logo.png" alt="...">
+                    </div>
+                    <button class="mt-2 mb-2 mt-5 nav-buttons">Allgemeines</button>
+                    <button class="mt-2 mb-2 nav-buttons">Star Wars</button>
+                    <button class="mt-2 mb-2 nav-buttons">Planeten</button>
                 </div>
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <div class="card-body">
-                            <h5 class="card-title" id="question-text">Frage</h5>
 
-                            <div class="card mb-2 answer-buttons">
-                                <button class="card-body " id="answer_1" onclick="answer('answer_1')">
+
+
+                <div class="col-md-8">
+                    <div class="card-body" id="card-body">
+
+                        <h5 class="card-title mt-2" id="question-text">Frage</h5>
+                        <div>
+                            <div class="mt-4 mb-3 answer-buttons-body">
+                                <button class="answer-buttons " id="answer_1" onclick="answer('answer_1')">
                                     Antwort 1
                                 </button>
                             </div>
 
-                            <div class="card mb-2 answer-buttons">
-                                <button class="card-body " id="answer_2" onclick="answer('answer_2')">
+                            <div class="mb-3 answer-buttons-body">
+                                <button class="answer-buttons " id="answer_2" onclick="answer('answer_2')">
                                     Antwort 2
                                 </button>
                             </div>
 
-                            <div class="card mb-2 answer-buttons">
-                                <button class="card-body " id="answer_3" onclick="answer('answer_3')">
+                            <div class="mb-3 answer-buttons-body">
+                                <button class="answer-buttons " id="answer_3" onclick="answer('answer_3')">
                                     Antwort 3
                                 </button>
                             </div>
 
-                            <div class="card mb-2 answer-buttons">
-                                <button class="card-body " id="answer_4" onclick="answer('answer_4')">
+                            <div class="mb-3 answer-buttons-body">
+                                <button class="answer-buttons " id="answer_4" onclick="answer('answer_4')">
                                     Antwort 4
                                 </button>
                             </div>
                         </div>
-                        <button id="previous-question" class="btn btn-primary previous-question" onclick="nextQuestion(), reset()" href="#" 
-                            disabled>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="bi bi-caret-left-fill" viewBox="0 0 16 16">
-                                <path
-                                    d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z" />
-                            </svg>
-                        </button>
-                        <span> <b id="current-question">1</b> von <b id="length-questions">5</b> Fragen</span>
-                        <button id="next-question" class="btn btn-primary next-question" onclick="nextQuestion(), reset()" href="#" 
-                            disabled>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
-                                <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
-                              </svg>
-                        </button>
+
+
+
+                        <div class="card-navigation">
+                            <button id="previous-question" class="pl-16 btn btn-primary previous-question"
+                                onclick="nextQuestion(), resetChoosedAnswer()" href="#" disabled>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-caret-left-fill" viewBox="0 0 16 16">
+                                    <path
+                                        d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z" />
+                                </svg>
+                            </button>
+                            <span> <b id="current-question">1</b> von <b id="length-questions">5</b> Fragen</span>
+                            <button id="next-question" class="btn btn-primary next-question"
+                                onclick="nextQuestion(), resetChoosedAnswer()" href="#" disabled>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-caret-right-fill" viewBox="0 0 16 16">
+                                    <path
+                                        d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
+                                </svg>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
+    </div>
 
 
 </body>
