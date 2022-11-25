@@ -3,13 +3,18 @@ body {
 }
 
 .container {
-    min-height: 100vh;
+    min-height: calc(100vh - 16px);
     background-color: #FEFAEF !important;
     display: flex;
     justify-content: center;
     align-items: center;
 
 
+}
+
+.progress {
+    --bs-progress-border-radius: none !important;
+    --bs-progress-bar-bg: #27355C !important;
 }
 
 .card-body {
@@ -46,7 +51,7 @@ body {
 .logo {
     display: flex;
     justify-content: center;
-    
+
 }
 
 .logo-img {
@@ -115,26 +120,29 @@ body {
     display: flex;
     align-items: center;
     flex-direction: column;
-    
+
 }
 
 .result img {
     width: 100px;
     object-fit: contain;
 }
-.result-points{
+
+.result-points {
     display: flex;
 }
-.result-points-text{
+
+.result-points-text {
     color: orange;
     margin-right: 20px;
     font-weight: 800;
 }
+
 .btn-width {
     width: 150px !important;
 }
 
-.tropy{
+.tropy {
     position: absolute;
     top: 40vh;
     right: 0;
