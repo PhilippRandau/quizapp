@@ -108,3 +108,49 @@ let questionsPl = [
     },
 
 ];
+
+
+let questionsJS = [
+    {
+        "question": "Wann wurde Javascript Ursprünglich entwickelt?",
+        "answer_1": "2000",
+        "answer_2": "1997",
+        "answer_3": "1995",
+        "answer_4": "1993",
+        "right_answer": 3
+    },
+    {
+        "question": "In welches HTML Element wird Javascript geschrieben?",
+        "answer_1": "&lt;script&gt;",
+        "answer_2": "&lt;body&gt;",
+        "answer_3": "&lt;js&gt;",
+        "answer_4": "&lt;javascript&gt;",
+        "right_answer": 1
+    },
+    {
+        "question": "Wo ist der richtige platz um JavaScript in HTML einzufügen?",
+        "answer_1": "Im &lt;head&gt; Bereich.",
+        "answer_2": "Im &lt;body&gt; Bereich.",
+        "answer_3": "&lt;head&gt; und &lt;body&gt; sind richtig.",
+        "answer_4": "In einem &lt;div&gt;.",
+        "right_answer": 4
+    },
+    {
+        "question": "console.log(3 > 2 > 1);",
+        "answer_1": "true",
+        "answer_2": "false",
+        "answer_3": "1",
+        "answer_4": "NaN",
+        "right_answer": 2
+    },
+    {
+        "question": "How do you write 'Hello World' in an alert box?",
+        "answer_1": 'alert("Hello World");',
+        "answer_2": 'msg("Hello World");',
+        "answer_3": 'print("Hello World");',
+        "answer_4": 'out("Hello World");',
+        "right_answer": 1
+    },
+    
+
+];

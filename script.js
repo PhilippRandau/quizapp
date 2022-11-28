@@ -104,6 +104,7 @@ function createContentinnerHTML(){
 
 function chooseQuestionTopic(topic) {
     questionsTopic = topic;
+    selectedTopicString = `${topic}`;
     showCurrentQuestion();
 }
 
@@ -234,3 +235,18 @@ function progressBar() {
 
 }
 
+function highlightSelectedTopic(){
+    if (questionsTopic == questionsSW) {
+        document.getElementById('button-StarWars').classList.add('hightlight-topic');
+        document.getElementById('button-Planets').classList.remove('hightlight-topic');
+        document.getElementById('button-JavaScript').classList.remove('hightlight-topic');
+    }else if (questionsTopic == questionsPl) {
+        document.getElementById('button-StarWars').classList.remove('hightlight-topic');
+        document.getElementById('button-JavaScript').classList.remove('hightlight-topic');
+        document.getElementById('button-Planets').classList.add('hightlight-topic');
+    }else if (questionsTopic == questionsJS) {
+        document.getElementById('button-StarWars').classList.remove('hightlight-topic');
+        document.getElementById('button-Planets').classList.remove('hightlight-topic');
+        document.getElementById('button-JavaScript').classList.add('hightlight-topic');
+    }
+}
