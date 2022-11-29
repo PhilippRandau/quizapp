@@ -5,7 +5,8 @@ let questionsSW = [
         "answer_2": "Krieg der Sterne",
         "answer_3": "Krieg gegen die Sterne",
         "answer_4": "Es gab nie einen offiziellen deutschen Namen",
-        "right_answer": 2
+        "right_answer": 2,
+        "choosed_answer":"",
     },
     {
         "question": "Wann ist Star Wars erschienen?",
@@ -13,7 +14,8 @@ let questionsSW = [
         "answer_2": "1999",
         "answer_3": "2005",
         "answer_4": "1957",
-        "right_answer": 1
+        "right_answer": 1,
+        "choosed_answer":"",
     },
     {
         "question": "Wer ist der Erfinder?",
@@ -21,7 +23,8 @@ let questionsSW = [
         "answer_2": "George W. Bush",
         "answer_3": "Keanu Reeves",
         "answer_4": "George Lucas",
-        "right_answer": 4
+        "right_answer": 4,
+        "choosed_answer":"",
     },
     {
         "question": "An welches große Medienunternehmen wurden die Rechte 2012 verkauft?",
@@ -29,7 +32,8 @@ let questionsSW = [
         "answer_2": "Netflix",
         "answer_3": "Disney",
         "answer_4": "Amazon",
-        "right_answer": 3
+        "right_answer": 3,
+        "choosed_answer":"",
     },
     {
         "question": "Wie viele Triologien gibt es aktuell?(2022)",
@@ -37,7 +41,8 @@ let questionsSW = [
         "answer_2": "3",
         "answer_3": "1",
         "answer_4": "2",
-        "right_answer": 2
+        "right_answer": 2,
+        "choosed_answer":"",
     },
 ];
 
@@ -48,7 +53,8 @@ let questionsPl = [
         "answer_2": "5",
         "answer_3": "8",
         "answer_4": "7",
-        "right_answer": 3
+        "right_answer": 3,
+        "choosed_answer":"",
     },
     {
         "question": "Mit welcher Geschwindigkeit bewegt sich Merkur um die Sonne?",
@@ -56,7 +62,8 @@ let questionsPl = [
         "answer_2": "100 km/s",
         "answer_3": "50 km/min",
         "answer_4": "50 km/h",
-        "right_answer": 1
+        "right_answer": 1,
+        "choosed_answer":"",
     },
     {
         "question": "Zählt Pluto als Planet zu unserem Sonnensystem?",
@@ -64,7 +71,8 @@ let questionsPl = [
         "answer_2": "Ja, aber bald nicht mehr.",
         "answer_3": "Nein, zu weit weg",
         "answer_4": "Nein, zu klein, aber er zählte mal dazu",
-        "right_answer": 4
+        "right_answer": 4,
+        "choosed_answer":"",
     },
     {
         "question": "Wie lange braucht die Erde, um einmal um die Sonne zu kreisen?",
@@ -72,7 +80,8 @@ let questionsPl = [
         "answer_2": "ungefähr 365 Tage",
         "answer_3": "ungefähr 265 Tage",
         "answer_4": "ungefähr 188 Tage",
-        "right_answer": 2
+        "right_answer": 2,
+        "choosed_answer":"",
     },
     {
         "question": "Warum ist der Mars rot?",
@@ -80,7 +89,8 @@ let questionsPl = [
         "answer_2": "Wegen sehr hohen Temperaturen",
         "answer_3": "Algen färben ihn",
         "answer_4": "Er ist in Wirklichkeit garnicht rot",
-        "right_answer": 1
+        "right_answer": 1,
+        "choosed_answer":"",
     },
     {
         "question": "Was für ein Planet ist Neptun?",
@@ -88,7 +98,8 @@ let questionsPl = [
         "answer_2": "Blauer Riese",
         "answer_3": "Wasserplanet",
         "answer_4": "Gasplanet",
-        "right_answer": 4
+        "right_answer": 4,
+        "choosed_answer":"",
     },
     {
         "question": "Welche Temperatur hat die Venus auf der Obefläche?",
@@ -96,7 +107,8 @@ let questionsPl = [
         "answer_2": "10°C-20°C",
         "answer_3": "400°C-500°C",
         "answer_4": "-100°C-200°C",
-        "right_answer": 3
+        "right_answer": 3,
+        "choosed_answer":"",
     },
     {
         "question": "Welcher Planet hat einen Ring um sich?",
@@ -104,7 +116,8 @@ let questionsPl = [
         "answer_2": "Saturn",
         "answer_3": "Venus",
         "answer_4": "Neptun",
-        "right_answer": 2
+        "right_answer": 2,
+        "choosed_answer":"",
     },
 
 ];
@@ -117,7 +130,8 @@ let questionsJS = [
         "answer_2": "1997",
         "answer_3": "1995",
         "answer_4": "1993",
-        "right_answer": 3
+        "right_answer": 3,
+        "choosed_answer":"",
     },
     {
         "question": "In welches HTML Element wird Javascript geschrieben?",
@@ -125,7 +139,8 @@ let questionsJS = [
         "answer_2": "&lt;body&gt;",
         "answer_3": "&lt;js&gt;",
         "answer_4": "&lt;javascript&gt;",
-        "right_answer": 1
+        "right_answer": 1,
+        "choosed_answer":"",
     },
     {
         "question": "Wo ist der richtige platz um JavaScript in HTML einzufügen?",
@@ -133,7 +148,8 @@ let questionsJS = [
         "answer_2": "Im &lt;body&gt; Bereich.",
         "answer_3": "&lt;head&gt; und &lt;body&gt; sind richtig.",
         "answer_4": "In einem &lt;div&gt;.",
-        "right_answer": 3
+        "right_answer": 3,
+        "choosed_answer":"",
     },
     {
         "question": "console.log(3 > 2 > 1);",
@@ -141,7 +157,8 @@ let questionsJS = [
         "answer_2": "false",
         "answer_3": "1",
         "answer_4": "NaN",
-        "right_answer": 2
+        "right_answer": 2,
+        "choosed_answer":"",
     },
     {
         "question": "How do you write 'Hello World' in an alert box?",
@@ -149,7 +166,8 @@ let questionsJS = [
         "answer_2": 'msg("Hello World");',
         "answer_3": 'print("Hello World");',
         "answer_4": 'out("Hello World");',
-        "right_answer": 1
+        "right_answer": 1,
+        "choosed_answer":"",
     },
     
 

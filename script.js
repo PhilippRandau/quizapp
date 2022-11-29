@@ -39,13 +39,13 @@ function startScreenContent() {
 
 function createContent(topic) {
     let content = document.getElementById('content');
-    content.innerHTML =  createContentinnerHTML();
+    content.innerHTML =  createContentHTML();
 
     chooseQuestionTopic(topic);
     highlightSelectedTopic();
 }
 
-function createContentinnerHTML(){
+function createContentHTML(){
     return /*html*/`
     <div class="card-body" id="card-body">
 
@@ -80,7 +80,7 @@ function createContentinnerHTML(){
 
     <div class="card-navigation">
             <button id="previous-question" class="pl-16 btn btn-primary previous-question"
-                onclick="/*Function*/" href="#" disabled>
+                onclick="previousQuestion()" href="#" disabled>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                     class="bi bi-caret-left-fill" viewBox="0 0 16 16">
                     <path
@@ -109,7 +109,7 @@ function chooseQuestionTopic(topic) {
 
 
 
-function resetChoosedAnswer() {
+function resetChoosedAnswerButtons() {
 
     document.getElementById('next-question').disabled = true;
     for (let i = 1; i < 5; i++) {
@@ -135,6 +135,7 @@ function showCurrentQuestion() {
     answer3.innerHTML = questionTopic['answer_3'];
     answer4.innerHTML = questionTopic['answer_4'];
     progressBar();
+
 }
 
 function questionStatus() {
@@ -151,10 +152,16 @@ function answer(Answer_X) {
     let rightAnswer = questionsTopic[currentQuestion]["right_answer"];
     let NumberFromString = extractNumberFromString(Answer_X);
     let rightAnswerString = `answer_${rightAnswer}`;
-    console.log(rightAnswerString);
-    if (NumberFromString == rightAnswer) {
+
+    if (questionsTopic[currentQuestion]["choosed_answer"].length == 0) {
+        saveAnswers(Answer_X);
+    }
+    
+
+    if ((NumberFromString == rightAnswer) && (questionsTopic[currentQuestion]["choosed_answer"].length == 0)) {
         document.getElementById(Answer_X).classList.add('bg-success');
         questionPoints++;
+        
         if (muted == false) {
             audio_success.play();
         }
@@ -162,13 +169,28 @@ function answer(Answer_X) {
     } else {
         document.getElementById(Answer_X).classList.add('bg-danger');
         document.getElementById(rightAnswerString).classList.add('bg-success');
-        if (muted == false) {
+        if (muted == false && (questionsTopic[currentQuestion]["choosed_answer"].length == 0)) {
             audio_fail.play();
         }
         
     }
     document.getElementById('next-question').disabled = false;
     lockAnswerButtons();
+}
+
+// function calculatePoints(){
+//     for (let i = 0; i < questionsTopic.length; i++) {
+//         if () {
+            
+//         }
+//         questionPoints++;
+//     }
+// }
+
+function saveAnswers(Answer_X){
+    let choosedAnswer = `${Answer_X}`;
+    questionsTopic[currentQuestion]["choosed_answer"] = choosedAnswer;
+    
 }
 
 function extractNumberFromString(Answer_X) {
@@ -179,12 +201,17 @@ function extractNumberFromString(Answer_X) {
 function nextQuestion() {
     if (currentQuestion < questionsTopic.length - 1) {
         currentQuestion++;
+        resetChoosedAnswerButtons();
         showCurrentQuestion();
-        resetChoosedAnswer();
+        if (questionsTopic[currentQuestion]["choosed_answer"].length != 0) {
+            answer(questionsTopic[currentQuestion]["choosed_answer"]);
+        }
+        document.getElementById('previous-question').disabled = false;
     } else {
+        calculatePoints();
         showFinalPoints();
     }
-
+    
     progressBar();
 }
 
@@ -196,14 +223,29 @@ function lockAnswerButtons() {
     }
 }
 
+function previousQuestion(){
+    resetChoosedAnswerButtons();
+    lockAnswerButtons();
+    currentQuestion--;
+    showCurrentQuestion();
+    if ((currentQuestion) == 0) {
+        document.getElementById('previous-question').disabled = true;
+    }
+    answer(questionsTopic[currentQuestion]["choosed_answer"]);
+}
+
+
 function showFinalPoints() {
     let cardBody = document.getElementById('card-body');
     cardBody.innerHTML = ''
-    cardBody.innerHTML = /*html*/`
+    cardBody.innerHTML = showFinalPointsHTML();
+    document.getElementById('tropy').classList.remove('d-none');
+}
+
+function showFinalPointsHTML(){
+    return /*html*/`
     <div class="result">
         <img class="mt-5" src="img/brain result.png" alt="">
-        
-    
         <h5 class="card-title mt-2 mb-2 text-center" id="question-text"> <b> Star Wars Quiz Erledigt </b></h5>
         <div class="result-points">
             <span class="result-points-text" > Deine Punktzahl ist </span> <span> <b> ${questionPoints}/${questionsTopic.length} </b></span>
@@ -212,10 +254,10 @@ function showFinalPoints() {
         <button onclick="resetReplay()" type="button" class="mt-2 btn btn-outline-primary btn-width">Replay</button>
     </div>
     `;
-    document.getElementById('tropy').classList.remove('d-none');
 }
 
 function resetReplay() {
+    resetpreviousAnswers();
     resetCurrentQuestion();
     hideTropyIMG();
     resetPoints();
@@ -223,9 +265,17 @@ function resetReplay() {
 }
 
 function resetChangeTopic(){
+    resetpreviousAnswers();
     resetCurrentQuestion();
     hideTropyIMG();
     resetPoints();
+}
+
+function resetpreviousAnswers(){
+    for (let i = 0; i < questionsTopic.length; i++) {
+        questionsTopic[i]["choosed_answer"] ='';
+        
+    }
 }
 
 function hideTropyIMG() {
