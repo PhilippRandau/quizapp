@@ -133,7 +133,7 @@ let questionsJS = [
         "answer_2": "Im &lt;body&gt; Bereich.",
         "answer_3": "&lt;head&gt; und &lt;body&gt; sind richtig.",
         "answer_4": "In einem &lt;div&gt;.",
-        "right_answer": 4
+        "right_answer": 3
     },
     {
         "question": "console.log(3 > 2 > 1);",

@@ -3,12 +3,13 @@ let questionPoints = 0;
 
 let questionsTopic = '';
 
-
+let muted = true;
+let audio_success = new Audio('audio/correct.mp3');
+let audio_fail = new Audio('audio/wrong.mp3');
 
 function init() {
 
     startScreen();
-    // resetReplay();
 }
 
 function startScreen() {
@@ -33,8 +34,6 @@ function startScreenContent() {
         </div>
         
     </div>
-    
-    
     `;
 }
 
@@ -89,7 +88,7 @@ function createContentinnerHTML(){
                 </svg>
             </button>
             <span> <b id="current-question">1</b> von <b id="length-questions">5</b> Fragen</span>
-            <button id="next-question" class="btn btn-primary next-question" onclick="nextQuestion(), resetChoosedAnswer()"
+            <button id="next-question" class="btn btn-primary next-question" onclick="nextQuestion()"
                 href="#" disabled>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                     class="bi bi-caret-right-fill" viewBox="0 0 16 16">
@@ -156,10 +155,17 @@ function answer(Answer_X) {
     if (NumberFromString == rightAnswer) {
         document.getElementById(Answer_X).classList.add('bg-success');
         questionPoints++;
-
+        if (muted == false) {
+            audio_success.play();
+        }
+        
     } else {
         document.getElementById(Answer_X).classList.add('bg-danger');
         document.getElementById(rightAnswerString).classList.add('bg-success');
+        if (muted == false) {
+            audio_fail.play();
+        }
+        
     }
     document.getElementById('next-question').disabled = false;
     lockAnswerButtons();
@@ -210,10 +216,16 @@ function showFinalPoints() {
 }
 
 function resetReplay() {
+    resetCurrentQuestion();
     hideTropyIMG();
     resetPoints();
-    resetCurrentQuestion();
     createContent(questionsTopic);
+}
+
+function resetChangeTopic(){
+    resetCurrentQuestion();
+    hideTropyIMG();
+    resetPoints();
 }
 
 function hideTropyIMG() {
@@ -248,5 +260,20 @@ function highlightSelectedTopic(){
         document.getElementById('button-StarWars').classList.remove('hightlight-topic');
         document.getElementById('button-Planets').classList.remove('hightlight-topic');
         document.getElementById('button-JavaScript').classList.add('hightlight-topic');
+    }
+}
+
+function toggleSound(){
+    muted = !muted;
+    toggleSoundSymbol();
+}
+
+function toggleSoundSymbol(){
+    if (muted) {
+        document.getElementById('sound-on').classList.add('d-none');
+        document.getElementById('sound-off').classList.remove('d-none');
+    }else{
+        document.getElementById('sound-off').classList.add('d-none');
+        document.getElementById('sound-on').classList.remove('d-none');
     }
 }

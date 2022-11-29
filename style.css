@@ -213,3 +213,21 @@ h3 {
 .min-height{
     min-height: 470px;
 }
+
+.toggle-sound{
+    margin-right: 7px;
+    margin-top: 7px;
+    display: flex;
+    justify-content: flex-end;
+    
+}
+
+.toggle-sound svg{
+    color: white;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    background-color: rgba(255, 255, 255, 0.238);
+    padding: 5px;
+    border-radius: 100%;
+}
