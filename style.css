@@ -10,7 +10,7 @@ h1 {
 
 h2 {
     font-size: 20px !important;
-
+    text-align: center;
 }
 
 h3 {
@@ -44,7 +44,7 @@ h3 {
     background-size: cover;
 }
 
-.start-quiz{
+.start-quiz {
     height: 150px;
     display: flex;
     align-items: flex-end;
@@ -85,6 +85,7 @@ h3 {
     --bs-card-border-width: none !important;
     width: 700px;
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.2) !important;
+    margin-bottom: 50px;
 }
 
 .quiz-card {
@@ -126,7 +127,7 @@ h3 {
     border-left: solid 4px;
 }
 
-.hightlight-topic{
+.highlight-topic {
     border-left: solid 4px !important;
     border-color: white;
     background-color: #ffffff41;
@@ -210,19 +211,19 @@ h3 {
     width: 125px;
 }
 
-.min-height{
+.min-height {
     min-height: 470px;
 }
 
-.toggle-sound{
+.toggle-sound {
     margin-right: 7px;
     margin-top: 7px;
     display: flex;
     justify-content: flex-end;
-    
+
 }
 
-.toggle-sound svg{
+.toggle-sound svg {
     color: white;
     cursor: pointer;
     width: 30px;
@@ -230,4 +231,67 @@ h3 {
     background-color: rgba(255, 255, 255, 0.238);
     padding: 5px;
     border-radius: 100%;
+}
+
+@media(max-width: 767px) {
+    .nav {
+        border-top-right-radius: 10px;
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: unset;
+    }
+    .card-body {
+        border-bottom-left-radius: unset;
+        border-bottom-right-radius: unset;
+    }
+}
+
+
+@media(max-width: 600px) {
+    body {
+        height: 100vh;
+    }
+
+    .nav {
+        border-top-right-radius: unset;
+        border-top-left-radius: unset;
+        border-bottom-left-radius: unset;
+    }
+
+    .container {
+        padding-right: unset !important;
+        padding-left: unset !important;
+
+    }
+
+    .card {
+        height: calc(100vh - 16px) !important;
+        margin-bottom: unset !important;
+    }
+
+    .card-body {
+        height: 100%;
+    }
+
+    .nav-buttons {
+        text-align: center;
+        padding-left: unset;
+        border-right: transparent solid 4px;
+    }
+
+    .highlight-topic {
+        border-right: solid 4px !important;
+    }
+
+    .nav-buttons:hover {
+        transition: ease-in-out 175ms;
+        border-right: solid 4px;
+    }
+
+    .full-height {
+        height: 100%;
+    }
+
+    .tropy {
+        width: 75px;
+    }
 }

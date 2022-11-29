@@ -87,7 +87,7 @@ function createContentHTML(){
                         d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z" />
                 </svg>
             </button>
-            <span> <b id="current-question">1</b> von <b id="length-questions">5</b> Fragen</span>
+            <span class="text-center"> <b id="current-question">1</b> von <b id="length-questions">5</b> Fragen</span>
             <button id="next-question" class="btn btn-primary next-question" onclick="nextQuestion()"
                 href="#" disabled>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -153,20 +153,22 @@ function answer(Answer_X) {
     let NumberFromString = extractNumberFromString(Answer_X);
     let rightAnswerString = `answer_${rightAnswer}`;
 
-    if (questionsTopic[currentQuestion]["choosed_answer"].length == 0) {
-        saveAnswers(Answer_X);
-    }
+    
     
 
-    if ((NumberFromString == rightAnswer) && (questionsTopic[currentQuestion]["choosed_answer"].length == 0)) {
+    if ((NumberFromString == rightAnswer)) {
         document.getElementById(Answer_X).classList.add('bg-success');
-        questionPoints++;
         
-        if (muted == false) {
-            audio_success.play();
+        if (questionsTopic[currentQuestion]["choosed_answer"].length == 0) {
+            questionPoints++;
+
+            if (muted == false) {
+                audio_success.play();
+            }
         }
         
-    } else {
+        
+    } else{
         document.getElementById(Answer_X).classList.add('bg-danger');
         document.getElementById(rightAnswerString).classList.add('bg-success');
         if (muted == false && (questionsTopic[currentQuestion]["choosed_answer"].length == 0)) {
@@ -174,18 +176,14 @@ function answer(Answer_X) {
         }
         
     }
+
+    if (questionsTopic[currentQuestion]["choosed_answer"].length == 0) {
+        saveAnswers(Answer_X);
+    }
     document.getElementById('next-question').disabled = false;
     lockAnswerButtons();
 }
 
-// function calculatePoints(){
-//     for (let i = 0; i < questionsTopic.length; i++) {
-//         if () {
-            
-//         }
-//         questionPoints++;
-//     }
-// }
 
 function saveAnswers(Answer_X){
     let choosedAnswer = `${Answer_X}`;
@@ -208,7 +206,7 @@ function nextQuestion() {
         }
         document.getElementById('previous-question').disabled = false;
     } else {
-        calculatePoints();
+        // calculatePoints();
         showFinalPoints();
     }
     
@@ -299,17 +297,17 @@ function progressBar() {
 
 function highlightSelectedTopic(){
     if (questionsTopic == questionsSW) {
-        document.getElementById('button-StarWars').classList.add('hightlight-topic');
-        document.getElementById('button-Planets').classList.remove('hightlight-topic');
-        document.getElementById('button-JavaScript').classList.remove('hightlight-topic');
+        document.getElementById('button-StarWars').classList.add('highlight-topic');
+        document.getElementById('button-Planets').classList.remove('highlight-topic');
+        document.getElementById('button-JavaScript').classList.remove('highlight-topic');
     }else if (questionsTopic == questionsPl) {
-        document.getElementById('button-StarWars').classList.remove('hightlight-topic');
-        document.getElementById('button-JavaScript').classList.remove('hightlight-topic');
-        document.getElementById('button-Planets').classList.add('hightlight-topic');
+        document.getElementById('button-StarWars').classList.remove('highlight-topic');
+        document.getElementById('button-JavaScript').classList.remove('highlight-topic');
+        document.getElementById('button-Planets').classList.add('highlight-topic');
     }else if (questionsTopic == questionsJS) {
-        document.getElementById('button-StarWars').classList.remove('hightlight-topic');
-        document.getElementById('button-Planets').classList.remove('hightlight-topic');
-        document.getElementById('button-JavaScript').classList.add('hightlight-topic');
+        document.getElementById('button-StarWars').classList.remove('highlight-topic');
+        document.getElementById('button-Planets').classList.remove('highlight-topic');
+        document.getElementById('button-JavaScript').classList.add('highlight-topic');
     }
 }
 
