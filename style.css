@@ -247,9 +247,7 @@ h3 {
 
 
 @media(max-width: 600px) {
-    body {
-        height: 100vh;
-    }
+    
 
     .nav {
         border-top-right-radius: unset;
@@ -266,10 +264,6 @@ h3 {
     .card {
         height: calc(100vh - 16px) !important;
         margin-bottom: unset !important;
-    }
-
-    .card-body {
-        height: 100%;
     }
 
     .nav-buttons {

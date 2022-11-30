@@ -18,7 +18,7 @@ let questionsSW = [
         "choosed_answer":"",
     },
     {
-        "question": "Wer ist der Erfinder?",
+        "question": "Wer ist der Erfinder von Star Wars?",
         "answer_1": "Sebastian Schweinsteiger",
         "answer_2": "George W. Bush",
         "answer_3": "Keanu Reeves",
