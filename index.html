@@ -6,10 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quizapp</title>
-    <script src="templates/database.js"></script>
-    <script src="script.js"></script>
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="/Quizapp/img/favicon.ico">
+
+    <script src="/Quizapp/templates/database.js"></script>
+    <script src="/Quizapp/script.js"></script>
+
+    <link rel="stylesheet" href="/Quizapp/style.css">
 
     <!-- Bootstrap Files -->
     <!-- CSS only -->
@@ -22,7 +25,7 @@
 </head>
 
 <body onload="init()">
-    <img id="tropy" class="tropy d-none" src="img/tropy.png" alt="">
+    <img id="tropy" class="tropy d-none" src="/Quizapp/img/tropy.png" alt="">
     <div class="progress">
         <div id="progress-bar" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
             aria-label="Animated striped example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"
@@ -50,18 +53,19 @@
                     </div>
                     <div class="logo mt-3">
 
-                        <img class="logo-img" src="/img/logo.png" alt="...">
+                        <img class="logo-img" src="/Quizapp/img/logo.png" alt="...">
 
                     </div>
-                    <button id="button-StarWars" onclick=" resetChangeTopic(), createContent(questionsSW)"
+                    <button id="button-StarWars" onclick=" resetChangeTopic(), createCardBody(questionsSW)"
                         class=" mt-5 nav-buttons">Star Wars</button>
-                    <button id="button-Planets" onclick="resetChangeTopic(), createContent(questionsPl)"
+                    <button id="button-Planets" onclick="resetChangeTopic(), createCardBody(questionsPl)"
                         class="nav-buttons">Planeten</button>
-                    <button id="button-JavaScript" onclick="resetChangeTopic(), createContent(questionsJS)"
+                    <button id="button-JavaScript" onclick="resetChangeTopic(), createCardBody(questionsJS)"
                         class="mb-2 nav-buttons">JavaScript</button>
                 </div>
 
-                <div id="content" class="col-md-8 min-height">
+                <div id="card-body" class="col-md-8 min-height card-body">
+                    
 
                 </div>
 

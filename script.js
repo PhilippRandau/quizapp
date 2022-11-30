@@ -8,77 +8,76 @@ let audio_success = new Audio('audio/correct.mp3');
 let audio_fail = new Audio('audio/wrong.mp3');
 
 function init() {
-
     startScreen();
 }
 
 function startScreen() {
-    let content = document.getElementById('content')
-    content.innerHTML = '';
-    content.innerHTML = startScreenContent();
+    let cardBody = document.getElementById('card-body')
+    cardBody.innerHTML = '';
+    cardBody.innerHTML = startScreenCardBody();
 }
-function startScreenContent() {
+
+function startScreenCardBody() {
     return /*html*/`
-    
     <div class="start-screen">
         <h1 class="text-center">Willkommen zur großartigen Quizapp</h1>
         <h2 class="mt-3">Bereit für eine Herrausforderung?</h2>
         <h3>Dann zeig was du kannst!</h3>
         <div class="start-quiz">
-            <button onclick="createContent(questionsSW)" type="button" class="btn btn-primary start-button">Quiz Starten <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+            <button onclick="createCardBody(questionsSW)" type="button" class="btn btn-primary start-button">Quiz Starten <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                         class="bi bi-caret-right-fill" viewBox="0 0 16 16">
                         <path
                             d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
                     </svg>
             </button>
         </div>
-        
     </div>
     `;
 }
 
-function createContent(topic) {
-    let content = document.getElementById('content');
-    content.innerHTML =  createContentHTML();
+function createCardBody(topic) {
+    let cardBody = document.getElementById('card-body');
+    cardBody.innerHTML = createCardBodyAnswersHTML();
+    cardBody.innerHTML += createCardBodyNavigationHTML();
 
     chooseQuestionTopic(topic);
     highlightSelectedTopic();
 }
 
-function createContentHTML(){
+function createCardBodyAnswersHTML() {
     return /*html*/`
-    <div class="card-body" id="card-body">
+        <h5 class="card-title mt-2 text-center" id="question-text">Frage</h5>
+        <div>
+            <div class="mt-4 mb-3 answer-buttons-body">
+                <button class="answer-buttons " id="answer_1" onclick="answer('answer_1')">
+                    Antwort 1
+                </button>
+            </div>
 
-    <h5 class="card-title mt-2 text-center" id="question-text">Frage</h5>
-    <div>
-        <div class="mt-4 mb-3 answer-buttons-body">
-            <button class="answer-buttons " id="answer_1" onclick="answer('answer_1')">
-                Antwort 1
-            </button>
+            <div class="mb-3 answer-buttons-body">
+                <button class="answer-buttons " id="answer_2" onclick="answer('answer_2')">
+                    Antwort 2
+                </button>
+            </div>
+
+            <div class="mb-3 answer-buttons-body">
+                <button class="answer-buttons " id="answer_3" onclick="answer('answer_3')">
+                    Antwort 3
+                </button>
+            </div>
+
+            <div class="mb-3 answer-buttons-body">
+                <button class="answer-buttons " id="answer_4" onclick="answer('answer_4')">
+                    Antwort 4
+                </button>
+            </div>
         </div>
+                `;
+}
 
-        <div class="mb-3 answer-buttons-body">
-            <button class="answer-buttons " id="answer_2" onclick="answer('answer_2')">
-                Antwort 2
-            </button>
-        </div>
-
-        <div class="mb-3 answer-buttons-body">
-            <button class="answer-buttons " id="answer_3" onclick="answer('answer_3')">
-                Antwort 3
-            </button>
-        </div>
-
-        <div class="mb-3 answer-buttons-body">
-            <button class="answer-buttons " id="answer_4" onclick="answer('answer_4')">
-                Antwort 4
-            </button>
-        </div>
-    </div>
-
-
-
-    <div class="card-navigation">
+function createCardBodyNavigationHTML() {
+    return /*html*/`
+        <div class="card-navigation">
             <button id="previous-question" class="pl-16 btn btn-primary previous-question"
                 onclick="previousQuestion()" href="#" disabled>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -97,123 +96,177 @@ function createContentHTML(){
                 </svg>
             </button>
         </div>
-    </div>
                 `;
 }
 
 function chooseQuestionTopic(topic) {
-    questionsTopic = topic;
-    selectedTopicString = `${topic}`;
+    saveTopicGlobal(topic);
     showCurrentQuestion();
 }
 
-
+function saveTopicGlobal(topic) {
+    return questionsTopic = topic;
+}
 
 function resetChoosedAnswerButtons() {
-
-    document.getElementById('next-question').disabled = true;
+    disableNextQuestionButton();
     for (let i = 1; i < 5; i++) {
         document.getElementById(`answer_${i}`).classList.remove('bg-success');
         document.getElementById(`answer_${i}`).classList.remove('bg-danger');
         document.getElementById(`answer_${i}`).disabled = false;
     }
-} 
+}
+
+function disableNextQuestionButton() {
+    return document.getElementById('next-question').disabled = true;
+    
+}
 
 function showCurrentQuestion() {
-
     questionStatus();
     let questionTopic = questionsTopic[currentQuestion];
-    let questionText = document.getElementById('question-text');
-    let answer1 = document.getElementById('answer_1');
-    let answer2 = document.getElementById('answer_2');
-    let answer3 = document.getElementById('answer_3');
-    let answer4 = document.getElementById('answer_4');
-
-    questionText.innerHTML = questionTopic['question'];
-    answer1.innerHTML = questionTopic['answer_1'];
-    answer2.innerHTML = questionTopic['answer_2'];
-    answer3.innerHTML = questionTopic['answer_3'];
-    answer4.innerHTML = questionTopic['answer_4'];
-    progressBar();
+    showQuestionText(questionTopic);
+    declareAnswers();
+    outputAnswers(questionTopic);
+    updateProgressBar();
 
 }
 
 function questionStatus() {
-    let lengthQuestions = document.getElementById('length-questions');
-    let currentQuestionOnCard = document.getElementById('current-question');
-    lengthQuestions.innerHTML = '';
-    lengthQuestions.innerHTML = questionsTopic.length;
-    currentQuestionOnCard.innerHTML = '';
-    currentQuestionOnCard.innerHTML = currentQuestion + 1;
+    showMaxLengthOfQuestionsNumber();
+    showCurrentQuestionNumber();
 }
 
+function showQuestionText(questionTopic) {
+    let questionText = document.getElementById('question-text');
+    questionText.innerHTML = questionTopic['question'];
+}
+
+function declareAnswers() {
+    let answer1 = document.getElementById('answer_1');
+    let answer2 = document.getElementById('answer_2');
+    let answer3 = document.getElementById('answer_3');
+    let answer4 = document.getElementById('answer_4');
+    return { answer1, answer2, answer3, answer4 };
+}
+
+function outputAnswers(questionTopic) {
+    let answers = declareAnswers();
+    answers.answer1.innerHTML = questionTopic['answer_1'];
+    answers.answer2.innerHTML = questionTopic['answer_2'];
+    answers.answer3.innerHTML = questionTopic['answer_3'];
+    answers.answer4.innerHTML = questionTopic['answer_4'];
+}
+
+function showMaxLengthOfQuestionsNumber() {
+    let lengthQuestions = document.getElementById('length-questions');
+    lengthQuestions.innerHTML = '';
+    lengthQuestions.innerHTML = questionsTopic.length;
+}
+
+function showCurrentQuestionNumber() {
+    let currentQuestionNumber = document.getElementById('current-question');
+    currentQuestionNumber.innerHTML = '';
+    currentQuestionNumber.innerHTML = currentQuestion + 1;
+}
 
 function answer(Answer_X) {
     let rightAnswer = questionsTopic[currentQuestion]["right_answer"];
     let NumberFromString = extractNumberFromString(Answer_X);
     let rightAnswerString = `answer_${rightAnswer}`;
 
-    
-    
-
-    if ((NumberFromString == rightAnswer)) {
-        document.getElementById(Answer_X).classList.add('bg-success');
-        
-        if (questionsTopic[currentQuestion]["choosed_answer"].length == 0) {
-            questionPoints++;
-
-            if (muted == false) {
-                audio_success.play();
-            }
-        }
-        
-        
-    } else{
-        document.getElementById(Answer_X).classList.add('bg-danger');
-        document.getElementById(rightAnswerString).classList.add('bg-success');
-        if (muted == false && (questionsTopic[currentQuestion]["choosed_answer"].length == 0)) {
-            audio_fail.play();
-        }
-        
+    if (compareChoosedQuestionToRightAnswer(NumberFromString,rightAnswer)) {
+        ifRightAnswer(Answer_X);
+    } else {
+        ifWrongAnswer(Answer_X, rightAnswerString);
     }
 
-    if (questionsTopic[currentQuestion]["choosed_answer"].length == 0) {
+    if (answerNotAlreadyTaken()) {
         saveAnswers(Answer_X);
     }
-    document.getElementById('next-question').disabled = false;
+    enableNextQuestionButton();
     lockAnswerButtons();
 }
 
+function compareChoosedQuestionToRightAnswer(NumberFromString,rightAnswer) {
+    return NumberFromString == rightAnswer;
+}
 
-function saveAnswers(Answer_X){
+function ifRightAnswer(Answer_X){
+    addButtonSuccess(Answer_X);
+    if (answerNotAlreadyTaken()) {
+        questionPoints++;
+        if (soundOn()) {
+            audio_success.play();
+        }
+    }
+}
+
+function ifWrongAnswer(Answer_X, rightAnswerString){
+    addButtonWrong(Answer_X);
+        addButtonSuccess(rightAnswerString);
+        if (soundOn() && answerNotAlreadyTaken()) {
+            audio_fail.play();
+        }
+}
+
+function addButtonSuccess(ID){
+    document.getElementById(ID).classList.add('bg-success');
+}
+
+function addButtonWrong(ID){
+    document.getElementById(ID).classList.add('bg-danger');
+}
+
+function answerNotAlreadyTaken(){
+    return questionsTopic[currentQuestion]["choosed_answer"].length == 0;
+}
+
+function soundOn(){
+   return muted == false;
+}
+
+function enableNextQuestionButton(){
+    document.getElementById('next-question').disabled = false;
+}
+
+function saveAnswers(Answer_X) {
     let choosedAnswer = `${Answer_X}`;
     questionsTopic[currentQuestion]["choosed_answer"] = choosedAnswer;
-    
+
 }
 
 function extractNumberFromString(Answer_X) {
-
     return Answer_X[Answer_X.length - 1];
 }
 
 function nextQuestion() {
-    if (currentQuestion < questionsTopic.length - 1) {
+    if (nextQuestionNotAlreadyAnswered()) {
         currentQuestion++;
         resetChoosedAnswerButtons();
         showCurrentQuestion();
-        if (questionsTopic[currentQuestion]["choosed_answer"].length != 0) {
+        if (choosedAnswerNotEmpty()) {
             answer(questionsTopic[currentQuestion]["choosed_answer"]);
         }
-        document.getElementById('previous-question').disabled = false;
+        enablePreviousQuestionButton();
     } else {
-        // calculatePoints();
         showFinalPoints();
     }
-    
-    progressBar();
+
+    updateProgressBar();
 }
 
+function nextQuestionNotAlreadyAnswered(){
+    return currentQuestion < questionsTopic.length - 1;
+}
 
+function choosedAnswerNotEmpty(){
+    return questionsTopic[currentQuestion]["choosed_answer"].length != 0;
+}
+
+function enablePreviousQuestionButton(){
+    document.getElementById('previous-question').disabled = false;
+}
 
 function lockAnswerButtons() {
     for (let i = 1; i < 5; i++) {
@@ -221,17 +274,20 @@ function lockAnswerButtons() {
     }
 }
 
-function previousQuestion(){
+function previousQuestion() {
     resetChoosedAnswerButtons();
     lockAnswerButtons();
     currentQuestion--;
     showCurrentQuestion();
     if ((currentQuestion) == 0) {
-        document.getElementById('previous-question').disabled = true;
+        disablePreviousQuestionButton();
     }
     answer(questionsTopic[currentQuestion]["choosed_answer"]);
 }
 
+function disablePreviousQuestionButton(){
+    document.getElementById('previous-question').disabled = true;
+}
 
 function showFinalPoints() {
     let cardBody = document.getElementById('card-body');
@@ -240,7 +296,7 @@ function showFinalPoints() {
     document.getElementById('tropy').classList.remove('d-none');
 }
 
-function showFinalPointsHTML(){
+function showFinalPointsHTML() {
     return /*html*/`
     <div class="result">
         <img class="mt-5" src="img/brain result.png" alt="">
@@ -259,20 +315,20 @@ function resetReplay() {
     resetCurrentQuestion();
     hideTropyIMG();
     resetPoints();
-    createContent(questionsTopic);
+    createCardBody(questionsTopic);
 }
 
-function resetChangeTopic(){
+function resetChangeTopic() {
     resetpreviousAnswers();
     resetCurrentQuestion();
     hideTropyIMG();
     resetPoints();
 }
 
-function resetpreviousAnswers(){
+function resetpreviousAnswers() {
     for (let i = 0; i < questionsTopic.length; i++) {
-        questionsTopic[i]["choosed_answer"] ='';
-        
+        questionsTopic[i]["choosed_answer"] = '';
+
     }
 }
 
@@ -288,39 +344,39 @@ function resetCurrentQuestion() {
     currentQuestion = 0;
 }
 
-function progressBar() {
+function updateProgressBar() {
     let progress = 100 / questionsTopic.length * (currentQuestion + 1)
 
     document.getElementById('progress-bar').style.width = `${progress}%`;
 
 }
 
-function highlightSelectedTopic(){
+function highlightSelectedTopic() {
     if (questionsTopic == questionsSW) {
         document.getElementById('button-StarWars').classList.add('highlight-topic');
         document.getElementById('button-Planets').classList.remove('highlight-topic');
         document.getElementById('button-JavaScript').classList.remove('highlight-topic');
-    }else if (questionsTopic == questionsPl) {
+    } else if (questionsTopic == questionsPl) {
         document.getElementById('button-StarWars').classList.remove('highlight-topic');
         document.getElementById('button-JavaScript').classList.remove('highlight-topic');
         document.getElementById('button-Planets').classList.add('highlight-topic');
-    }else if (questionsTopic == questionsJS) {
+    } else if (questionsTopic == questionsJS) {
         document.getElementById('button-StarWars').classList.remove('highlight-topic');
         document.getElementById('button-Planets').classList.remove('highlight-topic');
         document.getElementById('button-JavaScript').classList.add('highlight-topic');
     }
 }
 
-function toggleSound(){
+function toggleSound() {
     muted = !muted;
     toggleSoundSymbol();
 }
 
-function toggleSoundSymbol(){
+function toggleSoundSymbol() {
     if (muted) {
         document.getElementById('sound-on').classList.add('d-none');
         document.getElementById('sound-off').classList.remove('d-none');
-    }else{
+    } else {
         document.getElementById('sound-off').classList.add('d-none');
         document.getElementById('sound-on').classList.remove('d-none');
     }
